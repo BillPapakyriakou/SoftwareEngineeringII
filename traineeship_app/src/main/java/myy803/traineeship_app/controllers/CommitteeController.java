@@ -1,29 +1,22 @@
 package myy803.traineeship_app.controllers;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import myy803.traineeship_app.controllers.searchstrategies.*;
 import myy803.traineeship_app.controllers.supervisorsearchstrategies.*;
 
-import myy803.traineeship_app.domain.Company;
-import myy803.traineeship_app.domain.Professor;
 import myy803.traineeship_app.domain.Student;
 import myy803.traineeship_app.domain.TraineeshipPosition;
 
-import myy803.traineeship_app.mappers.CompanyMapper;
-import myy803.traineeship_app.mappers.ProfessorMapper;
 import myy803.traineeship_app.mappers.StudentMapper;
 import myy803.traineeship_app.mappers.TraineeshipPositionsMapper;
+
 
 @Controller
 @RequestMapping("/committee")
