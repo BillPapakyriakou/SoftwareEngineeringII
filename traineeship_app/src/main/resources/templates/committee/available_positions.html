@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Available Positions</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>Available Positions</h3>
+	<hr>
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Position Id</th>
+				<th>Title</th>
+				<th>Description</th>
+				<th>From Date</th>
+				<th>To Date</th>
+				<th>Skills</th>
+				<th>Topics</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="position : ${positions}">
+			
+				<td th:text="${position.id}" />	
+				<td th:text="${position.title}" />	
+				<td th:text="${position.description}" />
+				<td th:text="${position.fromDate}" />
+				<td th:text="${position.toDate}" />	
+				<td th:text="${position.skills}" />
+				<td th:text="${position.topics}" />
+				<td>
+    				<a th:href="@{/committee/assign_position(selected_position_id=${position.id}, applicant_username=${student_username})}"
+					   class="btn btn-info btn-sm btn-block">
+						Assign Position to Applicant
+					</a>	
+					<br>
+				</td>
+				
+			</tr>
+		</tbody>		
+	</table>
+	
+	<a th:href="@{/committee/dashboard}">Back to Committee Dashboard</a>
+	
+</div>
+	
+</body>
+</html>
+
+
+

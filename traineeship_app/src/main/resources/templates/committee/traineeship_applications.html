@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Traineeship Applications</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>Traineeship Applications</h3>
+	<hr>
+		
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>AM</th>
+				<th>Average Grade</th>
+				<th>Preferred Location</th>
+				<th>Interests</th>
+				<th>Skills</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="student : ${traineeship_applications}">
+			
+				<td th:text="${student.username}" />	
+				<td th:text="${student.studentName}" />	
+				<td th:text="${student.AM}" />	
+				<td th:text="${student.avgGrade}" />	
+				<td th:text="${student.preferredLocation}" />	
+				<td th:text="${student.interests}" />	
+				<td th:text="${student.skills}" />	
+					
+				<td>
+					<a th:href="@{/committee/find_positions(selected_student_id=${student.username}, strategy='location')}"
+					   class="btn btn-info btn-sm btn-block">
+						Find Positions Based On Location
+					</a>	
+					<br>	
+					
+					<a th:href="@{/committee/find_positions(selected_student_id=${student.username}, strategy='interests')}"
+					   class="btn btn-info btn-sm btn-block">
+						Find Positions Based On Interests
+					</a>	
+					<br>			
+				</td>
+				
+			</tr>
+		</tbody>		
+	</table>
+	
+	<a th:href="@{/committee/dashboard}">Back to Committee Dashboard</a>
+	
+</div>
+	
+</body>
+</html>
+
+
+

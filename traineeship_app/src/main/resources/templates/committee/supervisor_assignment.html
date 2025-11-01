@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Supervisor Assignment</title>
+</head>
+
+<body>
+	
+	<div class="container">
+	<h2>Supervisor Assignment  Dashboard</h2>
+  
+  <br> <br> <hr> <br> <br>
+  
+	<br> <br> <hr> <br> <br>
+			
+	<p>
+    	<a th:href="@{/committee/assign_supervisor(selected_position_id=${position_id}, strategy='interests')}" class="btn btn-primary btn-sm mb-3">Assign Supervisor Based on Interests</a>
+    	<a th:href="@{/committee/assign_supervisor(selected_position_id=${position_id}, strategy='load')}" class="btn btn-primary btn-sm mb-3">Assign Supervisor Based on Load</a>
+    </p>
+		
+	</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
