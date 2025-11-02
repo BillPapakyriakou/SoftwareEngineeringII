@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import myy803.traineeship_app.domain.Student;
 import myy803.traineeship_app.mappers.StudentMapper;
 
+
+// IT WORKS
 @Controller
 public class StudentController {
 
