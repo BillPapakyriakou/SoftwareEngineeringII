@@ -12,7 +12,6 @@ import myy803.traineeship_app.domain.Professor;
 import myy803.traineeship_app.mappers.ProfessorMapper;
 
 @Controller
-@RequestMapping("/professor")
 public class ProfessorController {
 
     @Autowired

@@ -19,7 +19,6 @@ import myy803.traineeship_app.mappers.TraineeshipPositionsMapper;
 
 
 @Controller
-@RequestMapping("/committee")
 public class CommitteeController {
 
     @Autowired

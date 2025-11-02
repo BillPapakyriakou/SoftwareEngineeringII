@@ -12,7 +12,6 @@ import myy803.traineeship_app.domain.Student;
 import myy803.traineeship_app.mappers.StudentMapper;
 
 @Controller
-@RequestMapping("/student")
 public class StudentController {
 
     @Autowired

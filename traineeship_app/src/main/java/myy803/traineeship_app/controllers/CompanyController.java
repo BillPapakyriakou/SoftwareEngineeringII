@@ -16,7 +16,6 @@ import myy803.traineeship_app.mappers.CompanyMapper;
 
 
 @Controller
-@RequestMapping("/company")
 public class CompanyController {
 
     @Autowired
