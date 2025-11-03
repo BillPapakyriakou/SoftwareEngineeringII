@@ -9,15 +9,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import myy803.traineeship_app.domain.Student;
-import myy803.traineeship_app.mappers.StudentMapper;
+import myy803.traineeship_app.service.StudentService;
 
 
 @Controller
 public class StudentController {
 
-    @Autowired
-    private StudentMapper studentMapper;
+    private final StudentService studentService;
 
+    @Autowired
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     // ---------- Student User Stories
 
@@ -29,14 +32,8 @@ public class StudentController {
 
     @RequestMapping("/student/profile")
     public String retrieveStudentProfile(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String studentUsername = authentication.getName();
-        System.err.println("Logged use: " + studentUsername);
 
-        Student student = studentMapper.findByUsername(studentUsername);
-        if (student == null)
-            student = new Student(studentUsername);
-
+        Student student = studentService.retrieveProfile();
         model.addAttribute("student", student);
 
         return "student/profile";
@@ -45,8 +42,7 @@ public class StudentController {
     @RequestMapping("/student/save_profile")
     public String saveProfile(@ModelAttribute("student") Student student, Model theModel) {
 
-        student.setLookingForTraineeship(true);
-        studentMapper.save(student);
+        studentService.saveProfile(student);
 
         return "student/dashboard";
     }
