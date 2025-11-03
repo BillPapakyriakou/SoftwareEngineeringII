@@ -2,9 +2,8 @@ package myy803.traineeship_app.controllers;
 
 import java.util.List;
 
+import myy803.traineeship_app.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,14 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import myy803.traineeship_app.domain.Company;
 import myy803.traineeship_app.domain.TraineeshipPosition;
-import myy803.traineeship_app.mappers.CompanyMapper;
 
 
 @Controller
 public class CompanyController {
 
+    private final CompanyService companyService;
+
     @Autowired
-    CompanyMapper companyMapper;
+    public CompanyController(CompanyService companyService) {
+        this.companyService = companyService;
+    }
 
     // ---------- Company User Stories
 
@@ -31,13 +33,7 @@ public class CompanyController {
 
     @RequestMapping("/company/profile")
     public String retrieveCompanyProfile(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        System.err.println("Logged use: " + username);
-
-        Company company = companyMapper.findByUsername(username);
-        if (company == null)
-            company = new Company(username);
+        Company company = companyService.retrieveProfile();
 
         model.addAttribute("company", company);
 
@@ -47,19 +43,14 @@ public class CompanyController {
     @RequestMapping("/company/save_profile")
     public String saveProfile(@ModelAttribute("profile") Company company, Model theModel) {
 
-        companyMapper.save(company);
+        companyService.saveProfile(company);
 
         return "company/dashboard";
     }
 
     @RequestMapping("/company/list_available_positions")
     public String listAvailablePositions(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        System.err.println("Logged use: " + username);
-
-        Company company = companyMapper.findByUsername(username);
-        List<TraineeshipPosition> positions = company.getAvailablePositions();
+        List<TraineeshipPosition> positions = companyService.listAvailablePositions();
 
         model.addAttribute("positions", positions);
 
@@ -69,7 +60,7 @@ public class CompanyController {
     @RequestMapping("/company/show_position_form")
     String showPositionForm(Model model) {
 
-        TraineeshipPosition position = new TraineeshipPosition();
+        TraineeshipPosition position = companyService.showPositionForm();
 
         model.addAttribute("position", position);
 
@@ -79,13 +70,7 @@ public class CompanyController {
 
     @RequestMapping("/company/save_position")
     public String savePosition(@ModelAttribute("position") TraineeshipPosition position, Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-
-        Company company = companyMapper.findByUsername(username);
-        position.setCompany(company);
-        company.addPosition(position);
-        companyMapper.save(company);
+        companyService.savePosition(position);
 
         return "redirect:/company/dashboard";
     }
