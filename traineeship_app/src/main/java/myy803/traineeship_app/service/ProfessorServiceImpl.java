@@ -27,7 +27,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String professorUsername = authentication.getName();
-        System.err.println("Logged use: " + professorUsername);
+        System.err.println("Logged user: " + professorUsername);
 
         Professor professor = professorMapper.findByUsername(professorUsername);
         if (professor == null) {

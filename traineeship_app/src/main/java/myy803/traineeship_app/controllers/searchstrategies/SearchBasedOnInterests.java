@@ -1,41 +1,54 @@
 package myy803.traineeship_app.controllers.searchstrategies;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import myy803.traineeship_app.domain.Student;
 import myy803.traineeship_app.domain.TraineeshipPosition;
-import myy803.traineeship_app.mappers.StudentMapper;
 import myy803.traineeship_app.mappers.TraineeshipPositionsMapper;
 
 @Component
-public class SearchBasedOnInterests implements PositionsSearchStrategy {
+public class SearchBasedOnInterests extends AbstractPositionsSearchStrategy {
+
 	@Autowired
 	private TraineeshipPositionsMapper positionsMapper;
-	
-	@Autowired
-	private StudentMapper studentMapper;
-	
+
 	@Override
-	public List<TraineeshipPosition> search(String applicantUsername) {
-		
-		Student applicant = studentMapper.findByUsername(applicantUsername);
-		Set<TraineeshipPosition> matchingPositionsSet = new HashSet<TraineeshipPosition>();
-		
-		String[] interests = applicant.getInterests().split("[,\\s+\\.]");
-		for(int i = 0; i < interests.length; i++) {
-			List<TraineeshipPosition> positions = positionsMapper.findByTopicsContainingAndIsAssignedFalse(
-					interests[i]
-							);
-			matchingPositionsSet.addAll(positions);
+	protected List<TraineeshipPosition> findMatchingPositions(Student applicant) {
+		List<TraineeshipPosition> matchingPositions = new ArrayList<>();
+
+		if (applicant.getInterests() == null || applicant.getInterests().isBlank()) {
+			return matchingPositions;
 		}
-		
-		return new ArrayList<TraineeshipPosition>(matchingPositionsSet);
+
+		String[] interests = applicant.getInterests().split("\\s*,\\s*|\\s+|\\.");
+
+		List<TraineeshipPosition> allPositions = positionsMapper.findByTopicsContainingAndIsAssignedFalse("");
+
+		for (TraineeshipPosition position : allPositions) {
+			if (position.getTopics() == null || position.getTopics().isBlank()) continue;
+
+			String[] positionTopics = position.getTopics().split("\\s*,\\s*");
+
+			boolean matched = false;
+			for (String interest : interests) {
+				interest = interest.trim();
+				if (interest.isEmpty()) continue;
+
+				for (String topic : positionTopics) {
+					if (topic.trim().equalsIgnoreCase(interest)) {
+						matchingPositions.add(position);
+						matched = true;
+						break;
+					}
+				}
+				if (matched) break;
+			}
+		}
+		return matchingPositions;
 	}
 
 }

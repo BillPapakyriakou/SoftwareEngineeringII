@@ -27,7 +27,7 @@ public class CompanyServiceImpl implements CompanyService {
     public Company retrieveProfile() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        System.err.println("Logged use: " + username);
+        System.err.println("Logged user: " + username);
 
         Company company = companyMapper.findByUsername(username);
         if (company == null) {

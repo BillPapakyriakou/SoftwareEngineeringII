@@ -28,7 +28,7 @@ public class StudentServiceImpl implements StudentService {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String studentUsername = authentication.getName();
-        System.err.println("Logged use: " + studentUsername);
+        System.err.println("Logged user: " + studentUsername);
 
         Student student = studentMapper.findByUsername(studentUsername);
         if (student == null) {
