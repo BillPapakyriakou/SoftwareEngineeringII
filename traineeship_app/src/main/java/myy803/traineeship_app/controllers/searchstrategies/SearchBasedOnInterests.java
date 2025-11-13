@@ -29,14 +29,16 @@ public class SearchBasedOnInterests extends AbstractPositionsSearchStrategy {
 		List<TraineeshipPosition> allPositions = positionsMapper.findByTopicsContainingAndIsAssignedFalse("");
 
 		for (TraineeshipPosition position : allPositions) {
-			if (position.getTopics() == null || position.getTopics().isBlank()) continue;
+			if (position.getTopics() == null || position.getTopics().isBlank())
+				continue;
 
 			String[] positionTopics = position.getTopics().split("\\s*,\\s*");
 
 			boolean matched = false;
 			for (String interest : interests) {
 				interest = interest.trim();
-				if (interest.isEmpty()) continue;
+				if (interest.isEmpty())
+					continue;
 
 				for (String topic : positionTopics) {
 					if (topic.trim().equalsIgnoreCase(interest)) {
@@ -45,7 +47,8 @@ public class SearchBasedOnInterests extends AbstractPositionsSearchStrategy {
 						break;
 					}
 				}
-				if (matched) break;
+				if (matched)
+					break;
 			}
 		}
 		return matchingPositions;

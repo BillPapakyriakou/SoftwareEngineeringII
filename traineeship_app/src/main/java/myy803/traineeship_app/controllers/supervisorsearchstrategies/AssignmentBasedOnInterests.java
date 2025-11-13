@@ -11,28 +11,20 @@ import myy803.traineeship_app.mappers.ProfessorMapper;
 import myy803.traineeship_app.mappers.TraineeshipPositionsMapper;
 
 @Component
-public class AssignmentBasedOnInterests implements SupervisorAssignmentStrategy{
-	@Autowired
-	TraineeshipPositionsMapper positionsMapper;
-	
-	@Autowired
-	ProfessorMapper professorMapper;
-	
+public class AssignmentBasedOnInterests extends AbstractSupervisorAssignmentStrategy {
+
 	@Override
-	public void assign(Integer positionId) {
-		TraineeshipPosition position = positionsMapper.findById(positionId).get();
-		List<Professor> professors = professorMapper.findAll();
-		
+	protected Professor selectSupervisor(TraineeshipPosition position, List<Professor> professors) {
+		if (position.getTopics() == null || position.getTopics().isBlank())
+			return null;
+
 		String[] topics = position.getTopics().split("[,\\s+\\.]");
 		Professor candidateSupervisor = null;
 		for(Professor professor : professors) {
 			if(professor.match(topics) == true)
 				candidateSupervisor = professor;
 		}
-		
-		position.setSupervisor(candidateSupervisor);
-		candidateSupervisor.addPosition(position);
-		positionsMapper.save(position);
-	}
 
+		return candidateSupervisor;
+	}
 }
