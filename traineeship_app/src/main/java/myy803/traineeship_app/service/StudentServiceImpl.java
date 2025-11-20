@@ -6,16 +6,20 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import myy803.traineeship_app.domain.Student;
+import myy803.traineeship_app.domain.TraineeshipPosition;
 import myy803.traineeship_app.mappers.StudentMapper;
+import myy803.traineeship_app.mappers.TraineeshipPositionsMapper;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 
     private final StudentMapper studentMapper;
+    private final TraineeshipPositionsMapper positionsMapper;
 
     @Autowired
-    public StudentServiceImpl(StudentMapper studentMapper) {
+    public StudentServiceImpl(StudentMapper studentMapper, TraineeshipPositionsMapper positionsMapper) {
         this.studentMapper = studentMapper;
+        this.positionsMapper = positionsMapper;
     }
 
     @Override
@@ -24,6 +28,7 @@ public class StudentServiceImpl implements StudentService {
         studentMapper.save(student);
     }
 
+    @Override
     public Student retrieveProfile() {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -36,5 +41,14 @@ public class StudentServiceImpl implements StudentService {
         }
 
         return student;
+    }
+
+    @Override
+    public void saveLogbook(Integer positionId, String newLogbook){
+        TraineeshipPosition position = positionsMapper.findById(positionId)
+                .orElseThrow(() -> new RuntimeException("Traineeship Position not found with ID: " + positionId));
+
+        position.setStudentLogbook(newLogbook);
+        positionsMapper.save(position);
     }
 }
