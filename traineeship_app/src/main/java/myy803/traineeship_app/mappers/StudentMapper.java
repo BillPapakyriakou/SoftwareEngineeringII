@@ -10,5 +10,6 @@ import myy803.traineeship_app.domain.Student;
 @Repository
 public interface StudentMapper extends JpaRepository<Student, String> {
 	Student findByUsername(String username);
+
 	List<Student> findByLookingForTraineeshipTrue();
 }

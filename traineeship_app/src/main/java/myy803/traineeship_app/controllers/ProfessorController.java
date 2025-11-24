@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import myy803.traineeship_app.domain.Professor;
+import myy803.traineeship_app.domain.TraineeshipPosition;
 import myy803.traineeship_app.service.ProfessorService;
+
+import java.util.List;
 
 @Controller
 public class ProfessorController {
@@ -42,5 +45,14 @@ public class ProfessorController {
         professorService.saveProfile(professor);
 
         return "professor/dashboard";
+    }
+
+    @RequestMapping("/professor/list_supervised_positions")
+    public String listSupervisedPositions(Model model){
+        List<TraineeshipPosition> positions = professorService.retrieveSupervisedPositions();
+
+        model.addAttribute("positions", positions);
+
+        return "professor/supervised_positions";
     }
 }

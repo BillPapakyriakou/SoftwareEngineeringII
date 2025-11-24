@@ -49,7 +49,15 @@
 				<td th:text="${position.toDate}" />	
 				<td th:text="${position.skills}" />
 				<td th:text="${position.topics}" />
-				
+
+				<td>
+					<a th:href="@{/company/delete_position(positionId=${position.id})}"
+					   class="btn btn-danger btn-sm"
+					   onclick="if (!(confirm('Are you sure you want to delete this position?'))) return false">
+						Delete
+					</a>
+				</td>
+
 			</tr>
 		</tbody>		
 	</table>

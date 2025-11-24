@@ -10,5 +10,6 @@ import myy803.traineeship_app.domain.Company;
 @Repository
 public interface CompanyMapper extends JpaRepository<Company, String> {
 	Company findByUsername(String username);
+
 	List<Company> findByCompanyLocation(String location);
 }

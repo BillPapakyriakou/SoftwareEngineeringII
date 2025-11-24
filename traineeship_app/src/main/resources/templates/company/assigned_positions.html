@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Assigned Positions</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3> Assigned traineeship positions </h3>
+    <hr>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Position Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Skills</th>
+            <th>Topics</th>
+            <th>Student (Username)</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="position : ${positions}">
+
+            <td th:text="${position.id}" />
+            <td th:text="${position.title}" />
+            <td th:text="${position.description}" />
+            <td th:text="${position.fromDate}" />
+            <td th:text="${position.toDate}" />
+            <td th:text="${position.skills}" />
+            <td th:text="${position.topics}" />
+            <td th:text="${position.student.username}" />
+
+        </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <a th:href="@{/company/dashboard}" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

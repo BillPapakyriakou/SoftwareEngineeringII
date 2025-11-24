@@ -1,11 +1,14 @@
 package myy803.traineeship_app.service;
 
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import myy803.traineeship_app.domain.Company;
 import myy803.traineeship_app.domain.TraineeshipPosition;
 import myy803.traineeship_app.mappers.CompanyMapper;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
+import myy803.traineeship_app.mappers.TraineeshipPositionsMapper;
 
 import java.util.List;
 
@@ -13,9 +16,12 @@ import java.util.List;
 public class CompanyServiceImpl implements CompanyService {
 
     private final CompanyMapper companyMapper;
+    private final TraineeshipPositionsMapper positionsMapper;
 
-    public CompanyServiceImpl(final CompanyMapper companyMapper) {
+    @Autowired
+    public CompanyServiceImpl(CompanyMapper companyMapper, TraineeshipPositionsMapper positionsMapper) {
         this.companyMapper = companyMapper;
+        this.positionsMapper = positionsMapper;
     }
 
     @Override
@@ -67,5 +73,26 @@ public class CompanyServiceImpl implements CompanyService {
         position.setCompany(company);
         company.addPosition(position);
         companyMapper.save(company);
+    }
+
+    @Override
+    public List<TraineeshipPosition> retrieveAssignedPositions(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        Company company = companyMapper.findByUsername(username);
+
+        List<TraineeshipPosition> assignedPositions = company.getAssignedPositions();
+
+        return assignedPositions;
+    }
+
+    @Override
+    public void deletePosition(Integer positionId){
+        if (positionsMapper.existsById(positionId)) {
+            positionsMapper.deleteById(positionId);
+        } else {
+            throw new IllegalArgumentException("Position with ID " + positionId + " not found.");
+        }
     }
 }

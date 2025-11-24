@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Supervised Positions</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3> Supervisor in positions: </h3>
+    <hr>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Position Id</th>
+            <th>Title</th>
+            <th>Company</th>
+            <th>Student</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Skills</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="position : ${positions}">
+
+            <td th:text="${position.id}" />
+            <td th:text="${position.title}" />
+            <td th:text="${position.company.companyName}" /> <td th:text="${position.student != null ? position.student.username : '---'}" /> <td th:text="${position.fromDate}" />
+            <td th:text="${position.toDate}" />
+            <td th:text="${position.skills}" />
+
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/professor/dashboard}" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

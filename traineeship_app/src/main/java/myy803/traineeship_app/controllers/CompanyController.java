@@ -50,9 +50,9 @@ public class CompanyController {
 
     @RequestMapping("/company/list_available_positions")
     public String listAvailablePositions(Model model){
-        List<TraineeshipPosition> positions = companyService.listAvailablePositions();
+        List<TraineeshipPosition> availablePositionss = companyService.listAvailablePositions();
 
-        model.addAttribute("positions", positions);
+        model.addAttribute("positions", availablePositionss);
 
         return "company/available_positions";
     }
@@ -75,5 +75,12 @@ public class CompanyController {
         return "redirect:/company/dashboard";
     }
 
+    @RequestMapping("/company/list_assigned_positions")
+    public String listAssignedPositions(Model model){
+        List<TraineeshipPosition> assignedPositions =  companyService.retrieveAssignedPositions();
 
+        model.addAttribute("positions", assignedPositions);
+
+        return "/company/assigned_positions";
+    }
 }

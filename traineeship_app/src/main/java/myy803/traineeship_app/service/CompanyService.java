@@ -1,6 +1,5 @@
 package myy803.traineeship_app.service;
 
-
 import java.util.List;
 import myy803.traineeship_app.domain.Company;
 import myy803.traineeship_app.domain.TraineeshipPosition;
@@ -17,4 +16,7 @@ public interface CompanyService {
 
     void savePosition(TraineeshipPosition traineeshipPosition);
 
+    List<TraineeshipPosition> retrieveAssignedPositions();
+
+    void deletePosition(Integer positionId);
 }
