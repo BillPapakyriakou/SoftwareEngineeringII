@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import myy803.traineeship_app.domain.Company;
 import myy803.traineeship_app.domain.TraineeshipPosition;
@@ -81,6 +82,13 @@ public class CompanyController {
 
         model.addAttribute("positions", assignedPositions);
 
-        return "/company/assigned_positions";
+        return "company/assigned_positions";
+    }
+
+    @RequestMapping("/company/delete_position")
+    public String deletePosition(@RequestParam("positionId") Integer positionId){
+        companyService.deletePosition(positionId);
+
+        return "redirect:/company/list_available_positions";
     }
 }
