@@ -6,6 +6,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import myy803.traineeship_app.domain.Company;
+import myy803.traineeship_app.domain.Evaluation;
+import myy803.traineeship_app.domain.EvaluationType;
 import myy803.traineeship_app.domain.TraineeshipPosition;
 import myy803.traineeship_app.mappers.CompanyMapper;
 import myy803.traineeship_app.mappers.TraineeshipPositionsMapper;
@@ -94,5 +96,20 @@ public class CompanyServiceImpl implements CompanyService {
         } else {
             throw new IllegalArgumentException("Position with ID " + positionId + " not found.");
         }
+    }
+
+    @Override
+    public void saveEvaluation(Evaluation evaluation, Integer positionId){
+        TraineeshipPosition position = positionsMapper.findById(positionId)
+                .orElseThrow(() -> new IllegalArgumentException("Position not found with id: " + positionId));
+
+        if (!position.isAssigned()) {
+            throw new IllegalStateException("Evaluation can only be submitted for positions in progress.");
+        }
+
+        evaluation.setEvaluationType(EvaluationType.COMPANY_EVALUATION);
+        position.getEvaluations().add(evaluation);
+        positionsMapper.save(position);
+
     }
 }

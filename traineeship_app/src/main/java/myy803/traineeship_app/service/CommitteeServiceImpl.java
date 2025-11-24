@@ -3,11 +3,12 @@ package myy803.traineeship_app.service;
 import myy803.traineeship_app.controllers.searchstrategies.*;
 import myy803.traineeship_app.controllers.supervisorsearchstrategies.*;
 
+import org.springframework.stereotype.Service;
+
 import myy803.traineeship_app.domain.Student;
 import myy803.traineeship_app.domain.TraineeshipPosition;
 import myy803.traineeship_app.mappers.StudentMapper;
 import myy803.traineeship_app.mappers.TraineeshipPositionsMapper;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

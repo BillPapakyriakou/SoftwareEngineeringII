@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <title>Supervised Positions</title>
 </head>
@@ -27,6 +28,7 @@
             <th>From Date</th>
             <th>To Date</th>
             <th>Skills</th>
+            <th>Evaluation</th>
         </tr>
         </thead>
 
@@ -35,10 +37,23 @@
 
             <td th:text="${position.id}" />
             <td th:text="${position.title}" />
-            <td th:text="${position.company.companyName}" /> <td th:text="${position.student != null ? position.student.username : '---'}" /> <td th:text="${position.fromDate}" />
+            <td th:text="${position.company.companyName}" />
+            <td th:text="${position.student != null ? position.student.username : '---'}" />
+            <td th:text="${position.fromDate}" />
             <td th:text="${position.toDate}" />
             <td th:text="${position.skills}" />
 
+            <td>
+                <a th:if="${#lists.isEmpty(position.evaluations.?[evaluationType.name()=='PROFESSOR_EVALUATION'])}"
+                   th:href="@{/professor/view_evaluation_form(positionId=${position.id})}"
+                   class="btn btn-success btn-sm">
+                    Evaluate
+                </a>
+
+                <span th:if="${!#lists.isEmpty(position.evaluations.?[evaluationType.name()=='PROFESSOR_EVALUATION'])}">
+                    Already Evaluated
+                </span>
+            </td>
         </tr>
         </tbody>
     </table>

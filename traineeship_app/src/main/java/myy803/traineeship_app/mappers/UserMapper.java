@@ -9,7 +9,6 @@ import myy803.traineeship_app.domain.User;
 
 @Repository
 public interface UserMapper extends JpaRepository<User, String> {
-	
 	User findByUsername(String username);
 
 }

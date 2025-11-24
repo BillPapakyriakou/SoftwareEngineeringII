@@ -28,6 +28,7 @@
             <th>Skills</th>
             <th>Topics</th>
             <th>Student (Username)</th>
+            <th>Evaluation</th>
         </tr>
         </thead>
 
@@ -42,6 +43,18 @@
             <td th:text="${position.skills}" />
             <td th:text="${position.topics}" />
             <td th:text="${position.student.username}" />
+
+            <td>
+                <a th:if="${#lists.isEmpty(position.evaluations.?[evaluationType.name()=='COMPANY_EVALUATION'])}"
+                   th:href="@{/company/view_evaluation_form(positionId=${position.id})}"
+                   class="btn btn-success btn-sm">
+                    Evaluate
+                </a>
+
+                <span th:if="${!#lists.isEmpty(position.evaluations.?[evaluationType.name()=='COMPANY_EVALUATION'])}">
+                    Already Evaluated
+                </span>
+            </td>
 
         </tr>
         </tbody>

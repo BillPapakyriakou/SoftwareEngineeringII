@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+          crossorigin="anonymous">
+
+    <title>Submit Evaluation</title>
+
+    <style>
+        .form-group label { width: 140px; }
+        select { width: 70px; display: inline-block; }
+        .success { color: green; margin-bottom: 20px; }
+        .btn-submit { margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h3>Submit Evaluation for Traineeship Position</h3>
+    <hr>
+
+    <!-- Επιτυχές μήνυμα -->
+    <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+
+    <form th:action="@{/company/save_evaluation(positionId=${positionId})}" th:object="${evaluation}" method="post">
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2">Motivation:</label>
+            <div class="col-sm-2">
+                <select class="form-control" th:field="*{motivation}">
+                    <option th:value="1">1</option>
+                    <option th:value="2">2</option>
+                    <option th:value="3">3</option>
+                    <option th:value="4">4</option>
+                    <option th:value="5">5</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2">Efficiency:</label>
+            <div class="col-sm-2">
+                <select class="form-control" th:field="*{efficiency}">
+                    <option th:value="1">1</option>
+                    <option th:value="2">2</option>
+                    <option th:value="3">3</option>
+                    <option th:value="4">4</option>
+                    <option th:value="5">5</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2">Effectiveness:</label>
+            <div class="col-sm-2">
+                <select class="form-control" th:field="*{effectiveness}">
+                    <option th:value="1">1</option>
+                    <option th:value="2">2</option>
+                    <option th:value="3">3</option>
+                    <option th:value="4">4</option>
+                    <option th:value="5">5</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-sm btn-submit">Submit Evaluation</button>
+        <a th:href="@{/company/list_assigned_positions}" class="btn btn-secondary btn-sm btn-submit">Back to Assigned Positions</a>
+
+    </form>
+
+</div>
+
+</body>
+</html>

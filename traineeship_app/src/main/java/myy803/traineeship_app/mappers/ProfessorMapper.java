@@ -7,7 +7,6 @@ import myy803.traineeship_app.domain.Professor;
 
 @Repository
 public interface ProfessorMapper extends JpaRepository<Professor, String> {
-	
 	Professor findByUsername(String username);
 
 }

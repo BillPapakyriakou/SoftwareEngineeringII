@@ -2,7 +2,6 @@ package myy803.traineeship_app.controllers;
 
 import java.util.List;
 
-import myy803.traineeship_app.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import myy803.traineeship_app.domain.Company;
+import myy803.traineeship_app.domain.Evaluation;
 import myy803.traineeship_app.domain.TraineeshipPosition;
-
+import myy803.traineeship_app.service.CompanyService;
 
 @Controller
 public class CompanyController {
@@ -90,5 +90,28 @@ public class CompanyController {
         companyService.deletePosition(positionId);
 
         return "redirect:/company/list_available_positions";
+    }
+
+    @RequestMapping("/company/view_evaluation_form")
+    public String viewEvaluationForm(@RequestParam("positionId") Integer positionId,
+                                     Model model) {
+        model.addAttribute("positionId", positionId);
+        model.addAttribute("evaluation", new Evaluation());
+
+        return "company/evaluation_form";
+    }
+
+    @RequestMapping("/company/save_evaluation")
+    public String saveEvaluation(@RequestParam("positionId") Integer positionId,
+                                 @ModelAttribute("evaluation") Evaluation evaluation,
+                                 Model model) {
+
+        companyService.saveEvaluation(evaluation, positionId);
+
+        List<TraineeshipPosition> assignedPositions = companyService.retrieveAssignedPositions();
+        model.addAttribute("positions", assignedPositions);
+        model.addAttribute("successMessage", "Evaluation submitted successfully!");
+
+        return "company/assigned_positions";
     }
 }

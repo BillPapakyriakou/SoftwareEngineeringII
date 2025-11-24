@@ -51,7 +51,6 @@ public class StudentController {
 
     @GetMapping("/student/logbook")
     public String viewLogbook(Model model){
-
         Student student = studentService.retrieveProfile();
 
         if (student.getAssignedTraineeship() == null){
