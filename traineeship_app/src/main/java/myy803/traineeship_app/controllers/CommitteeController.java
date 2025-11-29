@@ -1,17 +1,19 @@
 package myy803.traineeship_app.controllers;
 
-import java.util.List;
-
 import myy803.traineeship_app.service.CommitteeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import myy803.traineeship_app.domain.Student;
+import myy803.traineeship_app.domain.Evaluation;
 import myy803.traineeship_app.domain.TraineeshipPosition;
 
+import java.util.*;
 
 @Controller
 public class CommitteeController {
@@ -76,4 +78,43 @@ public class CommitteeController {
         return "committee/dashboard";
     }
 
+    @RequestMapping("/committee/list_assigned_traineeships")
+    public String listAssignedPositions(Model model) {
+        List<TraineeshipPosition> assignedPositions = committeeService.showAssignedPositions();
+
+        model.addAttribute("positions", assignedPositions);
+
+        return "committee/assigned_positions";
+    }
+
+    @GetMapping("/committee/monitor_position")
+    public String monitorPosition(
+            @RequestParam("positionId") Integer positionId,
+            Model model) {
+
+        TraineeshipPosition position = committeeService.findById(positionId);
+
+        List<Evaluation> companyEvaluations = committeeService.getCompanyEvaluations(position);
+        List<Evaluation> professorEvaluations = committeeService.getProfessorEvaluations(position);
+
+        model.addAttribute("position", position);
+        model.addAttribute("companyEvaluations", companyEvaluations);
+        model.addAttribute("professorEvaluations", professorEvaluations);
+
+        return "committee/monitor_view";
+    }
+
+    @PostMapping("/committee/submit_grade")
+    public String submitGrade(@RequestParam("positionId") Integer positionId,
+                              @RequestParam("grade") boolean grade,
+                              Model model) {
+
+        committeeService.submitFinalGrade(positionId, grade);
+
+        List<TraineeshipPosition> assignedPositions = committeeService.showAssignedPositions();
+
+        model.addAttribute("positions", assignedPositions);
+
+        return "committee/assigned_positions";
+    }
 }

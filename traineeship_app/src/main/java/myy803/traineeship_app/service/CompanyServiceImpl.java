@@ -49,7 +49,7 @@ public class CompanyServiceImpl implements CompanyService {
     public List<TraineeshipPosition> listAvailablePositions() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        System.err.println("Logged use: " + username);
+        System.err.println("Logged user: " + username);
 
         Company company = companyMapper.findByUsername(username);
         List<TraineeshipPosition> positions = company.getAvailablePositions();

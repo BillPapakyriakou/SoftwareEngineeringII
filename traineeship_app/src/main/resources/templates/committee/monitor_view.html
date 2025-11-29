@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Monitor Traineeship</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body class="container mt-4">
+
+<h2 th:text="'Monitoring: ' + ${position.title}"></h2>
+<hr>
+
+<!-- COMPANY EVALUATIONS -->
+<h4>Company Evaluations</h4>
+<div th:if="${#lists.isEmpty(companyEvaluations)}">
+    <p class="text-muted">No company evaluations yet.</p>
+</div>
+
+<div th:each="ev : ${companyEvaluations}" class="card mb-3">
+    <div class="card-body">
+        <p><b>Motivation:</b> <span th:text="${ev.motivation}"></span></p>
+        <p><b>Efficiency:</b> <span th:text="${ev.efficiency}"></span></p>
+        <p><b>Effectiveness:</b> <span th:text="${ev.effectiveness}"></span></p>
+    </div>
+</div>
+
+<hr>
+
+<!-- PROFESSOR EVALUATIONS -->
+<h4>Professor Evaluations</h4>
+<div th:if="${#lists.isEmpty(professorEvaluations)}">
+    <p class="text-muted">No professor evaluations yet.</p>
+</div>
+
+<div th:each="ev : ${professorEvaluations}" class="card mb-3">
+    <div class="card-body">
+        <p><b>Motivation:</b> <span th:text="${ev.motivation}"></span></p>
+        <p><b>Efficiency:</b> <span th:text="${ev.efficiency}"></span></p>
+        <p><b>Effectiveness:</b> <span th:text="${ev.effectiveness}"></span></p>
+        <p><b>Facilities:</b> <span th:text="${ev.facilities}"></span></p>
+        <p><b>Guidance:</b> <span th:text="${ev.guidance}"></span></p>
+    </div>
+</div>
+
+<hr>
+
+<!-- FINAL PASS / FAIL -->
+<h4>Complete Traineeship</h4>
+<form th:action="@{/committee/submit_grade}" method="post">
+    <input type="hidden" name="positionId" th:value="${position.id}" />
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="grade" value="true" id="pass">
+        <label class="form-check-label" for="pass">Pass</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="grade" value="false" id="fail">
+        <label class="form-check-label" for="fail">Fail</label>
+    </div>
+    <button type="submit" class="btn btn-success mt-2">Submit Grade</button>
+</form>
+
+<hr>
+<a th:href="@{/committee/list_assigned_traineeships}" class="btn btn-secondary btn-sm">Back to Assigned Positions</a>
+
+</body>
+</html>

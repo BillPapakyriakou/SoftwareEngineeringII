@@ -39,7 +39,7 @@ public class TraineeshipPosition {
 	
 	@Column(name="pass_fail")
 	private boolean passFailGrade;
-	
+
 	@OneToOne(fetch = FetchType.EAGER, 
 			mappedBy = "assignedTraineeship",
 			cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})

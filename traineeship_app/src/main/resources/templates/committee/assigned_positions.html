@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Committee - Assigned Positions</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3 class="mt-4">Assigned Traineeship Positions</h3>
+    <hr>
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>Pos. ID</th>
+            <th>Title</th>
+            <th>Company</th>
+            <th>Student</th>
+            <th>Supervisor</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="position : ${positions}">
+
+            <td th:text="${position.id}"></td>
+            <td th:text="${position.title}"></td>
+            <td th:text="${position.company != null} ? ${position.company.username} : 'N/A'"></td>
+            <td th:text="${position.student != null} ? ${position.student.username} : 'Unknown'"></td>
+            <td>
+                <span th:if="${position.supervisor != null}" th:text="${position.supervisor.username}" class="text-success font-weight-bold"></span>
+                <span th:if="${position.supervisor == null}" class="text-danger">Not Assigned</span>
+            </td>
+
+            <td>
+                <a th:href="@{/committee/monitor_position(positionId=${position.id})}"
+                   class="btn btn-warning btn-sm">
+                    Monitor / Grade
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <a th:href="@{/committee/dashboard}" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>
