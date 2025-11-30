@@ -46,19 +46,14 @@
 <hr>
 
 <!-- FINAL PASS / FAIL -->
-<h4>Complete Traineeship</h4>
-<form th:action="@{/committee/submit_grade}" method="post">
-    <input type="hidden" name="positionId" th:value="${position.id}" />
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="grade" value="true" id="pass">
-        <label class="form-check-label" for="pass">Pass</label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="grade" value="false" id="fail">
-        <label class="form-check-label" for="fail">Fail</label>
-    </div>
-    <button type="submit" class="btn btn-success mt-2">Submit Grade</button>
-</form>
+<div class="text-center mt-3 d-flex justify-content-center">
+    <form th:action="@{/committee/pass/{positionId}(positionId=${position.id})}" method="post">
+        <button type="submit" class="btn btn-success px-4 py-2">Pass</button>
+    </form>
+    <form th:action="@{/committee/fail/{positionId}(positionId=${position.id})}" method="post">
+        <button type="submit" class="btn btn-danger px-4 py-2">Fail</button>
+    </form>
+</div>
 
 <hr>
 <a th:href="@{/committee/list_assigned_traineeships}" class="btn btn-secondary btn-sm">Back to Assigned Positions</a>

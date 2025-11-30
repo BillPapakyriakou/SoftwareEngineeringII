@@ -33,7 +33,10 @@ public class TraineeshipPosition {
 	
 	@Column(name="is_assigned")
 	private boolean isAssigned;
-	
+
+	@Column(name = "is_completed", nullable = false)
+	private boolean isCompleted = false;  // New field added to keep track of traineeship completion
+
 	@Column(name="student_log_book")
 	private String studentLogbook;
 	
@@ -62,7 +65,7 @@ public class TraineeshipPosition {
 	}
 
 	public TraineeshipPosition(Integer id, String title, String description, LocalDate fromDate, LocalDate toDate,
-			String topics, String skills, boolean isAssigned, String studentLogBook, boolean passFailGrade,
+			String topics, String skills, boolean isAssigned, boolean isCompleted, String studentLogBook, boolean passFailGrade,
 			Student student, Professor supervisor, Company company, List<Evaluation> evaluations) {
 		super();
 		this.id = id;
@@ -73,6 +76,7 @@ public class TraineeshipPosition {
 		this.topics = topics;
 		this.skills = skills;
 		this.isAssigned = isAssigned;
+		this.isCompleted = isCompleted;
 		this.studentLogbook = studentLogBook;
 		this.passFailGrade = passFailGrade;
 		this.student = student;
@@ -143,6 +147,14 @@ public class TraineeshipPosition {
 
 	public void setAssigned(boolean isAssigned) {
 		this.isAssigned = isAssigned;
+	}
+
+	public boolean isCompleted() {
+		return isCompleted;
+	}
+
+	public void setCompleted(boolean isCompleted) {
+		this.isCompleted = isCompleted;
 	}
 
 	public String getStudentLogbook() {

@@ -9,4 +9,5 @@ public interface StudentService {
     Student retrieveProfile();
 
     void saveLogbook(Integer positionId, String newLogbook);
+
 }

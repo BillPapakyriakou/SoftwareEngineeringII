@@ -53,8 +53,8 @@ public class Student {
 	}
 
 	public Student(String studentUsername) {
-		this.username = studentUsername;
-		this.lookingForTraineeship = true;
+		//this.username = studentUsername;
+		//this.lookingForTraineeship = true;
 	}
 
 	public String getUsername() {

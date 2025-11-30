@@ -98,11 +98,22 @@ public class CommitteeServiceImpl implements CommitteeService {
     }
 
     @Override
-    public void submitFinalGrade(Integer positionId, boolean grade) {
-        TraineeshipPosition position = positionsMapper.findById(positionId).orElse(null);
+    public void completeTraineeship(Integer positionId, boolean isPassed) {
 
-        position.setPassFailGrade(grade);
+        TraineeshipPosition traineeship = positionsMapper.findById(positionId).orElse(null);
+        if (traineeship == null) return;
 
-        positionsMapper.save(position);
+        traineeship.setAssigned(false);
+        traineeship.setPassFailGrade(isPassed);
+        traineeship.setCompleted(true);
+        traineeship.setSupervisor(null);
+
+        Student student = traineeship.getStudent();
+        if (student != null) {
+            student.setAssignedTraineeship(null);
+            studentMapper.save(student);
+        }
+
+        positionsMapper.save(traineeship);
     }
 }

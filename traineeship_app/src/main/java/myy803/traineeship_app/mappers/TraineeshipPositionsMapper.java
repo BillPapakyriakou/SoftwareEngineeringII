@@ -13,6 +13,8 @@ public interface TraineeshipPositionsMapper extends JpaRepository<TraineeshipPos
 
 	List<TraineeshipPosition> findByTopicsContainingAndIsAssignedFalse(String username);
 
+	List<TraineeshipPosition> findByTopicsContainingAndIsAssignedFalseAndIsCompletedFalse(String topic);
+
 	List<TraineeshipPosition> findBySupervisorUsername(String username);
 
 	List<TraineeshipPosition> findByIsAssignedTrue();

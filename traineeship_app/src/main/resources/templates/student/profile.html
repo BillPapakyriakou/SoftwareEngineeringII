@@ -47,10 +47,28 @@
 			<label for="html">Skills</label>
 			<input type="text" th:field="*{skills}"
 					class="form-control mb-4 col-4" >
-					
-			<input type="hidden" th:field="*{lookingForTraineeship}" />
-						
-			<button type="submit" class="btn btn-info col-2">Save</button>
+
+
+			<input class="form-check-input" type="checkbox" id="lookingForTraineeship"
+				   th:field="*{lookingForTraineeship}"
+				   th:disabled="${student.assignedTraineeship != null}">
+			<label class="form-check-label" for="lookingForTraineeship">
+				Looking for Traineeship
+			</label>
+
+			<!-- Hidden input to submit value if checkbox is disabled -->
+			<input type="hidden" name="lookingForTraineeship"
+				   th:value="${student.lookingForTraineeship}"
+				   th:if="${student.assignedTraineeship != null}" />
+
+
+			<label class="form-check-label" for="lookingForTraineeship">
+				Looking for Traineeship
+			</label>
+
+			<button type="submit" class="btn btn-info col-2">
+				Save
+			</button>
 						
 		</form>
 	

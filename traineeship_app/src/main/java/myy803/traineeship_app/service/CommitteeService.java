@@ -24,5 +24,7 @@ public interface CommitteeService {
 
     List<Evaluation> getProfessorEvaluations(TraineeshipPosition position);
 
-    void submitFinalGrade(Integer positionId, boolean grade);
+    //void submitFinalGrade(Integer positionId, boolean grade);
+
+    void completeTraineeship(Integer positionId, boolean isPassed);
 }

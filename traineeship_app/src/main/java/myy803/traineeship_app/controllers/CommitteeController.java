@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import myy803.traineeship_app.domain.Student;
 import myy803.traineeship_app.domain.Evaluation;
@@ -103,7 +104,7 @@ public class CommitteeController {
 
         return "committee/monitor_view";
     }
-
+    /*
     @PostMapping("/committee/submit_grade")
     public String submitGrade(@RequestParam("positionId") Integer positionId,
                               @RequestParam("grade") boolean grade,
@@ -116,5 +117,20 @@ public class CommitteeController {
         model.addAttribute("positions", assignedPositions);
 
         return "committee/assigned_positions";
+    }
+    */
+    @PostMapping("/committee/pass/{positionId}")
+    public String pass(@PathVariable("positionId") Integer positionId) {
+        committeeService.completeTraineeship(positionId, true);
+        return "redirect:/committee/list_assigned_traineeships";
+        //return "redirect:/committee/assigned_positions/" + positionId + "?continue";
+        //return "redirect:/committee/show-evaluations/" + positionId + "?continue";
+    }
+
+    @PostMapping("/committee/fail/{positionId}")
+    public String fail(@PathVariable("positionId") Integer positionId) {
+        committeeService.completeTraineeship(positionId, false);
+        return "redirect:/committee/list_assigned_traineeships";
+        //return "redirect:/committee/show-evaluations/" + positionId + "?continue";
     }
 }

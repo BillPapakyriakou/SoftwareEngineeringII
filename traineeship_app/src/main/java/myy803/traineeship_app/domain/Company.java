@@ -81,7 +81,7 @@ public class Company {
 	public List<TraineeshipPosition> getAvailablePositions() {
 		List<TraineeshipPosition> availablePositions = new ArrayList<TraineeshipPosition>();
 		for(TraineeshipPosition position : positions)
-			if(position.isAssigned() == false)
+			if(position.isAssigned() == false && !position.isCompleted())
 				availablePositions.add(position);
 		
 		return availablePositions;

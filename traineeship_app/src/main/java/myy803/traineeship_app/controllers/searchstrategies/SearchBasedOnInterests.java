@@ -24,9 +24,9 @@ public class SearchBasedOnInterests extends AbstractPositionsSearchStrategy {
 			return matchingPositions;
 		}
 
-		String[] interests = applicant.getInterests().split("\\s*,\\s*|\\s+|\\.");
+		String[] interests = applicant.getInterests().split("\\s*,\\s*");
 
-		List<TraineeshipPosition> allPositions = positionsMapper.findByTopicsContainingAndIsAssignedFalse("");
+		List<TraineeshipPosition> allPositions = positionsMapper.findByTopicsContainingAndIsAssignedFalseAndIsCompletedFalse("");
 
 		for (TraineeshipPosition position : allPositions) {
 			if (position.getTopics() == null || position.getTopics().isBlank())

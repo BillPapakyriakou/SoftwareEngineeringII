@@ -22,11 +22,6 @@ public class StudentServiceImpl implements StudentService {
         this.positionsMapper = positionsMapper;
     }
 
-    @Override
-    public void saveProfile(Student student) {
-        student.setLookingForTraineeship(true);
-        studentMapper.save(student);
-    }
 
     @Override
     public Student retrieveProfile() {
@@ -50,5 +45,23 @@ public class StudentServiceImpl implements StudentService {
 
         position.setStudentLogbook(newLogbook);
         positionsMapper.save(position);
+    }
+
+    public void saveProfile(Student student) {
+
+        Student existingStudent = studentMapper.findByUsername(student.getUsername());
+
+        existingStudent.setStudentName(student.getStudentName());
+        existingStudent.setAM(student.getAM());
+        existingStudent.setAvgGrade(student.getAvgGrade());
+        existingStudent.setPreferredLocation(student.getPreferredLocation());
+        existingStudent.setInterests(student.getInterests());
+        existingStudent.setSkills(student.getSkills());
+
+
+        if (existingStudent.getAssignedTraineeship() == null) {
+            existingStudent.setLookingForTraineeship(student.isLookingForTraineeship());
+        }
+        studentMapper.save(existingStudent);
     }
 }

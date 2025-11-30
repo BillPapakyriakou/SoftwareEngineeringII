@@ -18,7 +18,8 @@ public class AssignmentBasedOnInterests extends AbstractSupervisorAssignmentStra
 		if (position.getTopics() == null || position.getTopics().isBlank())
 			return null;
 
-		String[] topics = position.getTopics().split("[,\\s+\\.]");
+		String[] topics = position.getTopics().split("\\s*,\\s*");
+		
 		Professor candidateSupervisor = null;
 		for(Professor professor : professors) {
 			if(professor.match(topics) == true)
