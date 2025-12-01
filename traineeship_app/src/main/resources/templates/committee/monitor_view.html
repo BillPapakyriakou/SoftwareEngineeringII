@@ -45,12 +45,12 @@
 
 <hr>
 
-<!-- FINAL PASS / FAIL -->
+
 <div class="text-center mt-3 d-flex justify-content-center">
-    <form th:action="@{/committee/pass/{positionId}(positionId=${position.id})}" method="post">
+    <form th:action="@{/committee/pass/{positionId}(positionId=${position.id})}" method="post" class="mx-2">
         <button type="submit" class="btn btn-success px-4 py-2">Pass</button>
     </form>
-    <form th:action="@{/committee/fail/{positionId}(positionId=${position.id})}" method="post">
+    <form th:action="@{/committee/fail/{positionId}(positionId=${position.id})}" method="post" class="mx-2">
         <button type="submit" class="btn btn-danger px-4 py-2">Fail</button>
     </form>
 </div>

@@ -15,7 +15,7 @@
 <body>
 	
 	<div class="container">
-			
+
 		<p class="h4 mb-4">Student Profile </p>
 	
 		<form action="#" th:action="@{/student/save_profile}"
@@ -66,14 +66,19 @@
 				Looking for Traineeship
 			</label>
 
-			<button type="submit" class="btn btn-info col-2">
-				Save
-			</button>
-						
+			<div class="mt-3">
+				<button type="submit" class="btn btn-info col-2">
+					Save
+				</button>
+			</div>
+
 		</form>
-	
+
 		<hr>
-		<a th:href="@{/student/dashboard}">Back to Student Dashboard</a>
+
+		<a th:href="@{/student/dashboard}" class="btn btn-success mt-2 text-white">
+			Back to Student Dashboard
+		</a>
 		
 	</div>
 </body>
