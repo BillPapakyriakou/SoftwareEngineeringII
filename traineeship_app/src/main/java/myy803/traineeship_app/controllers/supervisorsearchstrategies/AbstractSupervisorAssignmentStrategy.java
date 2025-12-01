@@ -24,6 +24,10 @@ public abstract class AbstractSupervisorAssignmentStrategy implements Supervisor
 
         Professor candidateSupervisor = selectSupervisor(position, professors);
 
+        if (candidateSupervisor == null) {
+            throw new IllegalStateException("No professor found for the selected assign strategy");
+        }
+
         position.setSupervisor(candidateSupervisor);
         candidateSupervisor.addPosition(position);
         positionsMapper.save(position);

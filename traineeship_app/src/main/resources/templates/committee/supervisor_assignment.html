@@ -2,12 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<!-- Required meta tags -->
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link rel="stylesheet"
+		  href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 
 	<title>Supervisor Assignment</title>
 </head>
@@ -15,28 +14,43 @@
 <body>
 
 <div class="container">
-	<h2>Supervisor Assignment  Dashboard</h2>
+	<h2>Supervisor Assignment Dashboard</h2>
 
-	<br> <br> <hr> <br> <br>
+	<hr>
 
-	<br> <br> <hr> <br> <br>
+	<!-- SUCCESS / ERROR MESSAGES -->
+	<div th:if="${supervisorError}" class="alert alert-danger" role="alert">
+		<span th:text="${supervisorError}"></span>
+	</div>
+
+	<div th:if="${supervisorAssigned}" class="alert alert-success" role="alert">
+		Supervisor assigned successfully.
+	</div>
+
+	<!-- Buttons -->
+	<p>
+		<a th:href="@{/committee/assign_supervisor(selected_position_id=${position_id}, strategy='interests')}"
+		   class="btn btn-primary btn-sm mb-3">
+			Assign Supervisor Based on Interests
+		</a>
+	</p>
 
 	<p>
-		<a th:href="@{/committee/assign_supervisor(selected_position_id=${position_id}, strategy='interests')}" class="btn btn-primary btn-sm mb-3">Assign Supervisor Based on Interests</a>
-		<a th:href="@{/committee/assign_supervisor(selected_position_id=${position_id}, strategy='load')}" class="btn btn-primary btn-sm mb-3">Assign Supervisor Based on Load</a>
+		<a th:href="@{/committee/assign_supervisor(selected_position_id=${position_id}, strategy='load')}"
+		   class="btn btn-primary btn-sm mb-3">
+			Assign Supervisor Based on Load
+		</a>
+	</p>
+
+	<p>
+		<a th:href="@{/committee/dashboard}"
+		   class="btn btn-secondary btn-sm mt-3"
+		   th:classappend="${supervisorAssigned != null and supervisorAssigned} ? '' : ' disabled'"
+		   th:attr="aria-disabled=${supervisorAssigned != null and supervisorAssigned ? false : true}">
+			Back to Dashboard
+		</a>
 	</p>
 
 </div>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-

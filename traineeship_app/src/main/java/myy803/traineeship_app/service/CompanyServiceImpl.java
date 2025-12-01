@@ -6,10 +6,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import myy803.traineeship_app.domain.Company;
+import myy803.traineeship_app.domain.Student;
 import myy803.traineeship_app.domain.Evaluation;
 import myy803.traineeship_app.domain.EvaluationType;
 import myy803.traineeship_app.domain.TraineeshipPosition;
 import myy803.traineeship_app.mappers.CompanyMapper;
+import myy803.traineeship_app.mappers.StudentMapper;
 import myy803.traineeship_app.mappers.TraineeshipPositionsMapper;
 
 import java.util.List;
@@ -18,12 +20,16 @@ import java.util.List;
 public class CompanyServiceImpl implements CompanyService {
 
     private final CompanyMapper companyMapper;
+    private final StudentMapper studentMapper;
     private final TraineeshipPositionsMapper positionsMapper;
 
     @Autowired
-    public CompanyServiceImpl(CompanyMapper companyMapper, TraineeshipPositionsMapper positionsMapper) {
+    public CompanyServiceImpl(CompanyMapper companyMapper,
+                              TraineeshipPositionsMapper positionsMapper,
+                              StudentMapper studentMapper) {
         this.companyMapper = companyMapper;
         this.positionsMapper = positionsMapper;
+        this.studentMapper = studentMapper;
     }
 
     @Override
@@ -91,6 +97,16 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void deletePosition(Integer positionId){
+
+        TraineeshipPosition position = positionsMapper.findById(positionId).orElse(null);
+
+        Student student = position.getStudent();
+        if (student != null) {
+            student.setAssignedTraineeship(null);
+            studentMapper.save(student);
+        }
+
+
         if (positionsMapper.existsById(positionId)) {
             positionsMapper.deleteById(positionId);
         } else {

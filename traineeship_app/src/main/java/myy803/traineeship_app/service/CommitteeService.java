@@ -14,6 +14,7 @@ public interface CommitteeService {
 
     void assignPosition(Integer positionId, String studentUsername);
 
+
     void assignSupervisor(Integer positionId, String strategy);
 
     List<TraineeshipPosition> showAssignedPositions();
@@ -23,8 +24,6 @@ public interface CommitteeService {
     List<Evaluation> getCompanyEvaluations(TraineeshipPosition position);
 
     List<Evaluation> getProfessorEvaluations(TraineeshipPosition position);
-
-    //void submitFinalGrade(Integer positionId, boolean grade);
 
     void completeTraineeship(Integer positionId, boolean isPassed);
 }

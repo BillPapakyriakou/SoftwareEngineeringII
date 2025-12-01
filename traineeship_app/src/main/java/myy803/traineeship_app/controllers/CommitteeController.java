@@ -68,15 +68,25 @@ public class CommitteeController {
         return "committee/supervisor_assignment";
     }
 
+
     @RequestMapping("/committee/assign_supervisor")
     public String assignSupervisor(
-            @RequestParam("selected_position_id") Integer positionId,
+            @RequestParam(value = "selected_position_id", required = false) Integer positionId,
             @RequestParam("strategy") String strategy,
             Model model) {
 
-        committeeService.assignSupervisor(positionId, strategy);
+        try {
+            committeeService.assignSupervisor(positionId, strategy);
+            model.addAttribute("supervisorAssigned", true);
+            model.addAttribute("supervisorError", null);
+        } catch (Exception e) {
+            model.addAttribute("supervisorAssigned", false);
+            model.addAttribute("supervisorError", "No professor matches this strategy.");
+        }
 
-        return "committee/dashboard";
+        model.addAttribute("position_id", positionId);
+
+        return "committee/supervisor_assignment";
     }
 
 
