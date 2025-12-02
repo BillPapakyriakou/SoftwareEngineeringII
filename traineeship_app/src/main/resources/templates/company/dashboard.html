@@ -1,39 +1,109 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
-	<title>Student Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #f5f7fa, #e2e8f0);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar-custom {
+            background-color: #4a90e2;
+            border-radius: 0;
+        }
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link,
+        .navbar-custom .btn-logout {
+            color: #fff;
+        }
+        .navbar-custom .btn-logout {
+            border-radius: 50px;
+        }
+        .navbar-custom .btn-logout:hover {
+            background-color: #c0392b;
+        }
+        .content-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+        h2 {
+            margin-bottom: 2rem;
+            font-weight: 600;
+            color: #333;
+        }
+        .section-card {
+            padding: 1.5rem;
+            background: #f9fafc;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        .section-card h5 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .section-card p {
+            font-weight: 300;
+            color: #555;
+        }
+        .btn-primary {
+            background-color: #4a90e2;
+            border: none;
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #357ABD;
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 
-
 <body>
-<div class="container">
+<nav class="navbar navbar-expand-lg navbar-custom px-4">
+    <a class="navbar-brand" href="#">Traineeship App</a>
+    <div class="ms-auto d-flex align-items-center">
+        <span class="me-3">Logged in as: <span sec:authentication="name"></span></span>
+        <a th:href="@{/logout}" class="btn btn-logout btn-sm">Logout</a>
+    </div>
+</nav>
 
-  <h2>Welcome to the Company Dashboard</h2>
-  
-  <br> <br> <hr> <br> <br>
-  
-  <h4>Logged as: <span sec:authentication="name"></span></h4>
-  <h4>Has role: <span sec:authentication="authorities"></span></h4>
+<div class="content-container">
+    <h2>Company Dashboard</h2>
 
-	<br> <br> <hr> <br> <br>
+    <div class="section-card">
+        <h5>Profile</h5>
+        <p>Manage your company profile.</p>
+        <a th:href="@{/company/profile}" class="btn btn-primary btn-sm">Go to Profile</a>
+    </div>
 
-    <p>
-    	<a th:href="@{/company/profile}" class="btn btn-primary btn-sm mb-3">Profile</a>
-    	<a th:href="@{/company/list_available_positions}" class="btn btn-primary btn-sm mb-3">Available Positions</a>
-    	<a th:href="@{/company/list_assigned_positions}" class="btn btn-primary btn-sm mb-3">Assigned Positions</a>
-    	<a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
-    
-    </p>
+    <div class="section-card">
+        <h5>Available Positions</h5>
+        <p>View and manage all positions your company has posted.</p>
+        <a th:href="@{/company/list_available_positions}" class="btn btn-primary btn-sm">View Positions</a>
+    </div>
+
+    <div class="section-card">
+        <h5>Assigned Positions</h5>
+        <p>Check positions that have been assigned to trainees.</p>
+        <a th:href="@{/company/list_assigned_positions}" class="btn btn-primary btn-sm">View Assigned</a>
+    </div>
+
 </div>
-  
-  
+
 </body>
 </html>
