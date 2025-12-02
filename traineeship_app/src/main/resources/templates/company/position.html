@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <!-- Required meta tags -->
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 	<title>Traineeship Position</title>
@@ -21,7 +21,7 @@
 		<form action="#" th:action="@{/company/save_position}"
 						 th:object="${position}" method="POST">
 		
-			<!-- Add hidden form field to handle update -->
+
 			<input type="hidden" th:field="*{id}" />
 			
 			<label for="html">Title</label>

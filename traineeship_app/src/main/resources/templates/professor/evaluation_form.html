@@ -24,13 +24,13 @@
     <h3>Submit Professor Evaluation</h3>
     <hr>
 
-    <!-- Success message -->
+
     <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
 
     <form th:action="@{/professor/save_evaluation(positionId=${positionId})}"
           th:object="${evaluation}" method="post">
 
-        <!-- Student Metrics -->
+
         <div class="form-group row">
             <label class="col-form-label col-sm-3">Motivation:</label>
             <div class="col-sm-2">

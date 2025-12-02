@@ -18,7 +18,7 @@
 
 	<hr>
 
-	<!-- SUCCESS / ERROR MESSAGES -->
+
 	<div th:if="${supervisorError}" class="alert alert-danger" role="alert">
 		<span th:text="${supervisorError}"></span>
 	</div>
@@ -27,7 +27,7 @@
 		Supervisor assigned successfully.
 	</div>
 
-	<!-- Buttons -->
+
 	<p>
 		<a th:href="@{/committee/assign_supervisor(selected_position_id=${position_id}, strategy='interests')}"
 		   class="btn btn-primary btn-sm mb-3">

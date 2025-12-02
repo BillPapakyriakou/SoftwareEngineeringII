@@ -24,7 +24,7 @@
     <h3>Submit Evaluation for Traineeship Position</h3>
     <hr>
 
-    <!-- Επιτυχές μήνυμα -->
+
     <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
 
     <form th:action="@{/company/save_evaluation(positionId=${positionId})}" th:object="${evaluation}" method="post">
