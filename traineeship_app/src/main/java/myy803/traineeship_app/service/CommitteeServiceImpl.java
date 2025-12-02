@@ -49,7 +49,6 @@ public class CommitteeServiceImpl implements CommitteeService {
         Student student = studentMapper.findByUsername(studentUsername);
         TraineeshipPosition position = positionsMapper.findById(positionId).get();
 
-        //position.setAssigned(true);
         position.setStudent(student);
 
         student.setAssignedTraineeship(position);
@@ -57,8 +56,6 @@ public class CommitteeServiceImpl implements CommitteeService {
 
         positionsMapper.save(position);
     }
-
-
 
     @Override
     public void assignSupervisor(Integer positionId, String strategy) {

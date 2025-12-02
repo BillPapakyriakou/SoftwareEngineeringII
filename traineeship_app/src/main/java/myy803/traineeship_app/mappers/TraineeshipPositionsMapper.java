@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface TraineeshipPositionsMapper extends JpaRepository<TraineeshipPosition, Integer> {
+
 	List<TraineeshipPosition> findByTopicsContaining(String username);
 
 	List<TraineeshipPosition> findByTopicsContainingAndIsAssignedFalse(String username);

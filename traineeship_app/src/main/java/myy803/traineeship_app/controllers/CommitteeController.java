@@ -89,8 +89,6 @@ public class CommitteeController {
         return "committee/supervisor_assignment";
     }
 
-
-
     @RequestMapping("/committee/list_assigned_traineeships")
     public String listAssignedPositions(Model model) {
         List<TraineeshipPosition> assignedPositions = committeeService.showAssignedPositions();
