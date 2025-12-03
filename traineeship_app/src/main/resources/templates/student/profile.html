@@ -2,85 +2,139 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Student Profile</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<style>
+		body {
+            background: linear-gradient(120deg, #f5f7fa, #e2e8f0);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .profile-container {
+            max-width: 700px;
+            margin: 3rem auto;
+            padding: 2.5rem;
+            background: #fff;
+            border-radius: 1.25rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        label {
+            font-weight: 500;
+            display: block;
+            margin-top: 1.2rem;
+            margin-bottom: 0.45rem;
+        }
+
+        input[type="text"] {
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 0 4px rgba(0,0,0,0.10);
+        }
+
+        .btn-primary {
+            background-color: #4a90e2;
+            border: none;
+            border-radius: 50px;
+            padding: 0.6rem 2rem;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #357ABD;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .form-check-label {
+            margin-left: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-check-input {
+            transform: scale(1.2);
+            margin-top: 0.3rem;
+        }
+
+        .divider {
+            border-bottom: 1px solid #d1d9e6;
+            margin: 2.2rem 0;
+        }
+	</style>
 </head>
 
 <body>
-	
-	<div class="container">
 
-		<p class="h4 mb-4">Student Profile </p>
-	
-		<form action="#" th:action="@{/student/save_profile}"
-						 th:object="${student}" method="POST">
-		
-			<!-- Add hidden form field to handle update -->
-			<input type="hidden" th:field="*{username}" />
-			
-			<label for="html">Full Name</label>
-			<input type="text" th:field="*{studentName}"
-					class="form-control mb-4 col-4" > 
-		
-			<label for="html">AM</label>
-			<input type="text" th:field="*{AM}"
-					class="form-control mb-4 col-4" >
+<div class="profile-container">
+	<h2>Student Profile</h2>
 
-			<label for="html">Average Grade</label>
-			<input type="text" th:field="*{avgGrade}"
-					class="form-control mb-4 col-4">
+	<form th:action="@{/student/save_profile}" th:object="${student}" method="POST">
 
-			<label for="html">Preferred Location</label>
-			<input type="text" th:field="*{preferredLocation}"
-					class="form-control mb-4 col-4" >
-					
-			<label for="html">Interests</label>
-			<input type="text" th:field="*{interests}"
-					class="form-control mb-4 col-4" >
-					
-			<label for="html">Skills</label>
-			<input type="text" th:field="*{skills}"
-					class="form-control mb-4 col-4" >
+		<input type="hidden" th:field="*{username}" />
 
+		<label>Full Name</label>
+		<input type="text" th:field="*{studentName}" class="form-control">
 
-			<input class="form-check-input" type="checkbox" id="lookingForTraineeship"
+		<label>AM</label>
+		<input type="text" th:field="*{AM}" class="form-control">
+
+		<label>Average Grade</label>
+		<input type="text" th:field="*{avgGrade}" class="form-control">
+
+		<label>Preferred Location</label>
+		<input type="text" th:field="*{preferredLocation}" class="form-control">
+
+		<label>Interests</label>
+		<input type="text" th:field="*{interests}" class="form-control">
+
+		<label>Skills</label>
+		<input type="text" th:field="*{skills}" class="form-control">
+
+		<div class="form-check mt-3">
+			<input class="form-check-input"
+				   type="checkbox"
+				   id="lookingForTraineeship"
 				   th:field="*{lookingForTraineeship}"
 				   th:disabled="${student.assignedTraineeship != null}">
 			<label class="form-check-label" for="lookingForTraineeship">
 				Looking for Traineeship
 			</label>
+		</div>
 
+		<input type="hidden"
+			   name="lookingForTraineeship"
+			   th:value="${student.lookingForTraineeship}"
+			   th:if="${student.assignedTraineeship != null}" />
 
-			<input type="hidden" name="lookingForTraineeship"
-				   th:value="${student.lookingForTraineeship}"
-				   th:if="${student.assignedTraineeship != null}" />
+		<div class="mt-4">
+			<button type="submit" class="btn btn-primary">
+				Save Profile
+			</button>
+		</div>
 
+	</form>
 
-			<label class="form-check-label" for="lookingForTraineeship">
-				Looking for Traineeship
-			</label>
+	<div class="divider"></div>
 
-			<div class="mt-3">
-				<button type="submit" class="btn btn-info col-2">
-					Save
-				</button>
-			</div>
+	<a th:href="@{/student/dashboard}" class="btn btn-secondary">
+		Back to Dashboard
+	</a>
+</div>
 
-		</form>
-
-		<hr>
-
-		<a th:href="@{/student/dashboard}" class="btn btn-success mt-2 text-white">
-			Back to Student Dashboard
-		</a>
-		
-	</div>
 </body>
-
 </html>
