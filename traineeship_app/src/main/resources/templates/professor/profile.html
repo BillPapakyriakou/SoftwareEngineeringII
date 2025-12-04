@@ -2,54 +2,110 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Professor Profile</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<style>
+		body {
+            background: linear-gradient(120deg, #f5f7fa, #e2e8f0);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .profile-container {
+            max-width: 700px;
+            margin: 3rem auto;
+            padding: 2.5rem;
+            background: #fff;
+            border-radius: 1.25rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        label {
+            font-weight: 500;
+            display: block;
+            margin-top: 1.2rem;
+            margin-bottom: 0.45rem;
+        }
+
+        input[type="text"] {
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 0 4px rgba(0,0,0,0.10);
+        }
+
+        .btn-primary {
+            background-color: #4a90e2;
+            border: none;
+            border-radius: 50px;
+            padding: 0.6rem 2rem;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #357ABD;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .divider {
+            border-bottom: 1px solid #d1d9e6;
+            margin: 2.2rem 0;
+        }
+	</style>
 </head>
 
 <body>
-	
-	<div class="container">
-			
-		<p class="h4 mb-4">Professor Profile </p>
-	
-		<form action="#" th:action="@{/professor/save_profile}"
-						 th:object="${professor}" method="POST">
-		
-			<!-- Add hidden form field to handle update -->
-			<input type="hidden" th:field="*{username}" />
-			
-			<label for="html">Full Name</label>
-			<input type="text" th:field="*{professorName}"
-					class="form-control mb-4 col-4" > 
-		
-			<label for="html">Interests</label>
-			<input type="text" th:field="*{interests}"
-					class="form-control mb-4 col-4" >
-						
-			<button type="submit" class="btn btn-info col-2">Save</button>
-						
-		</form>
-	
-		<hr>
-		<a th:href="@{/professor/dashboard}">Back to Professor Dashboard</a>
-		
-	</div>
+
+<div class="profile-container">
+	<h2>Professor Profile</h2>
+
+	<form th:action="@{/professor/save_profile}" th:object="${professor}" method="POST">
+
+		<input type="hidden" th:field="*{username}" />
+
+		<label>Full Name</label>
+		<input type="text" th:field="*{professorName}" class="form-control">
+
+		<label>Interests</label>
+		<input type="text" th:field="*{interests}" class="form-control">
+
+		<div class="mt-4">
+			<button type="submit" class="btn btn-primary">
+				Save Profile
+			</button>
+		</div>
+
+	</form>
+
+	<div class="divider"></div>
+
+	<a th:href="@{/professor/dashboard}" class="btn btn-secondary">
+		Back to Dashboard
+	</a>
+</div>
+
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
