@@ -87,15 +87,14 @@
 
 <div class="eval-container">
 
-    <h3 class="mb-3">Submit Evaluation</h3>
+    <h3 class="mb-3">Evaluation Form</h3>
 
     <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
 
     <form th:action="@{/professor/save_evaluation(positionId=${positionId})}"
           th:object="${evaluation}" method="post">
 
-        <!-- STUDENT PERFORMANCE -->
-        <h5>Student Evaluation</h5>
+        <h5>Student Performance Review</h5>
 
         <div class="mb-3">
             <label>Motivation</label>
@@ -132,8 +131,8 @@
 
         <div class="divider"></div>
 
-        <!-- COMPANY EVALUATION -->
-        <h5>Company Evaluation</h5>
+
+        <h5>Company Experience Feedback</h5>
 
         <div class="mb-3">
             <label>Facilities</label>

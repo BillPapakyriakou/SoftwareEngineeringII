@@ -81,15 +81,15 @@
 
 <div class="eval-container">
 
-    <h3 class="mb-3">Submit Evaluation</h3>
+    <h3 class="mb-3">Evaluation Form</h3>
 
     <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
 
     <form th:action="@{/company/save_evaluation(positionId=${positionId})}"
           th:object="${evaluation}" method="post">
 
-        <!-- STUDENT PERFORMANCE ONLY -->
-        <h5>Student Evaluation</h5>
+
+        <h5>Student Performance Review</h5>
 
         <div class="mb-3">
             <label>Motivation</label>
@@ -124,7 +124,7 @@
             </select>
         </div>
 
-        <!-- BUTTONS -->
+
         <div class="mt-4">
             <button type="submit" class="btn btn-primary">Submit Evaluation</button>
             <a th:href="@{/company/list_assigned_positions}" class="btn btn-secondary ms-2">

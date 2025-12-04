@@ -33,17 +33,22 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.08);
         }
 
-        /* BLUE Evaluation Card */
         .evaluation-card {
-            background-color: #4a90e2 !important;
-            color: white !important;
+            background-color: #4a90e2;
+            color: white;
             border: none;
             border-radius: 1rem;
             box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .evaluation-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.15);
         }
 
         .evaluation-card p {
-            color: white !important;
+            color: white;
         }
 
         h2, h4 {
@@ -51,11 +56,10 @@
             color: #333;
         }
 
-        /* Wider Pass & Fail buttons */
         .btn-pass,
         .btn-fail {
-            width: 170px;          /* WIDER */
-            padding: 0.75rem 2rem; /* TALLER */
+            width: 170px;
+            padding: 0.75rem 2rem;
             border-radius: 50px;
             font-size: 1.05rem;
             color: white;
@@ -110,7 +114,6 @@
     <h2 th:text="'Monitoring: ' + ${position.title}"></h2>
     <hr>
 
-    <!-- Company Evaluations -->
     <h4>Company Evaluations</h4>
 
     <div th:if="${#lists.isEmpty(companyEvaluations)}">
@@ -127,7 +130,6 @@
 
     <hr>
 
-    <!-- Professor Evaluations -->
     <h4>Professor Evaluations</h4>
 
     <div th:if="${#lists.isEmpty(professorEvaluations)}">
@@ -146,7 +148,6 @@
 
     <hr>
 
-    <!-- Pass / Fail Buttons -->
     <div class="text-center mt-3 d-flex justify-content-center">
 
         <form th:action="@{/committee/pass/{positionId}(positionId=${position.id})}" method="post" class="mx-3">
