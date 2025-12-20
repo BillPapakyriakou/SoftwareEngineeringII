@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Traineeship Applications</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<style>
+		body {
+            background: linear-gradient(120deg, #f5f7fa, #e2e8f0);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .topbar {
+            width: 100%;
+            background-color: #4a90e2;
+            padding: 1rem 2rem;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            border-bottom-left-radius: 0.4rem;
+            border-bottom-right-radius: 0.4rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .page-container {
+            max-width: 1200px;
+            margin: auto;
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 1.25rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        h3 {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Modern Table Styling */
+        .modern-table {
+            border-collapse: separate;
+            border-spacing: 0 0.6rem;
+        }
+
+        .modern-table thead th {
+            background: #4a90e2;
+            color: #fff;
+            font-weight: 500;
+            border: none;
+            padding: 0.85rem;
+            text-align: left;
+        }
+
+        .modern-table tbody tr {
+            background: #ffffff;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.05);
+            border-radius: 0.8rem;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .modern-table tbody tr:hover {
+            transform: scale(1.01);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+        }
+
+        .modern-table tbody td {
+            padding: 0.9rem 1rem;
+            border-top: none !important;
+        }
+
+        .modern-table tbody tr td:first-child {
+            border-top-left-radius: 0.8rem;
+            border-bottom-left-radius: 0.8rem;
+        }
+
+        .modern-table tbody tr td:last-child {
+            border-top-right-radius: 0.8rem;
+            border-bottom-right-radius: 0.8rem;
+        }
+
+        /* Orange button */
+        .btn-orange {
+        	text-decoration: none !important;
+            background-color: #ff8c42;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.45rem 1.2rem;
+            transition: background-color 0.2s, transform 0.2s;
+            width: 100%;
+        }
+
+        .btn-orange:hover {
+            background-color: #e6762d;
+            transform: translateY(-2px);
+        }
+
+        /* Green button */
+        .btn-green {
+        	text-decoration: none !important;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.45rem 1.2rem;
+            transition: background-color 0.2s, transform 0.2s;
+            width: 100%;
+        }
+
+        .btn-green:hover {
+            background-color: #3e8e41;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.55rem 1.5rem;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+	</style>
+</head>
+
+<body>
+
+<div class="topbar">
+	Traineeship Applications
+</div>
+
+<div class="page-container">
+
+	<table class="table modern-table">
+		<thead>
+		<tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>AM</th>
+			<th>Average Grade</th>
+			<th>Preferred Location</th>
+			<th>Interests</th>
+			<th>Skills</th>
+			<th>Actions</th>
+		</tr>
+		</thead>
+
+		<tbody>
+		<tr th:each="student : ${traineeship_applications}">
+			<td th:text="${student.username}"></td>
+			<td th:text="${student.studentName}"></td>
+			<td th:text="${student.AM}"></td>
+			<td th:text="${student.avgGrade}"></td>
+			<td th:text="${student.preferredLocation}"></td>
+			<td th:text="${student.interests}"></td>
+			<td th:text="${student.skills}"></td>
+
+			<td>
+				<div class="d-flex flex-column gap-2">
+
+					<a th:href="@{/committee/find_positions(selected_student_id=${student.username}, strategy='location')}"
+					   class="btn-orange mb-2">
+						Select Based on Location
+					</a>
+
+					<a th:href="@{/committee/find_positions(selected_student_id=${student.username}, strategy='interests')}"
+					   class="btn-green">
+						Select Based on Interests
+					</a>
+
+				</div>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<div class="mt-4">
+		<a th:href="@{/committee/dashboard}" class="btn btn-secondary">Back to Committee Dashboard</a>
+	</div>
+
+</div>
+
+</body>
+</html>

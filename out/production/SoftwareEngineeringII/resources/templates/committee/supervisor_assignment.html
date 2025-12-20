@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Supervisor Assignment</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<style>
+		body {
+			background: linear-gradient(120deg, #f5f7fa, #e2e8f0);
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		.topbar {
+			width: 100%;
+			background-color: #4a90e2;
+			padding: 1rem 2rem;
+			color: white;
+			font-size: 1.4rem;
+			font-weight: 600;
+			margin-bottom: 2rem;
+			border-bottom-left-radius: 0.4rem;
+			border-bottom-right-radius: 0.4rem;
+			box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+		}
+
+		.page-container {
+			max-width: 650px;
+			margin: auto;
+			background: #fff;
+			padding: 2.5rem;
+			border-radius: 1.25rem;
+			box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+		}
+
+		h2 {
+			font-weight: 600;
+			color: #333;
+			margin-bottom: 1.5rem;
+			text-align: center;
+		}
+
+
+		.btn-modern-blue,
+		.btn-modern-purple {
+			display: inline-block;
+			width: 100%;
+			max-width: 350px;
+			text-align: center;
+			padding: 0.85rem 1.4rem;
+			font-size: 1rem;
+			font-weight: 500;
+
+			border: none;
+			border-radius: 50px;
+			color: #fff !important;
+			text-decoration: none !important;
+
+			transition: transform 0.15s, background-color 0.2s;
+		}
+
+		.btn-modern-blue {
+			background-color: #4A90E2;
+		}
+
+		.btn-modern-blue:hover {
+			background-color: #357ABD;
+			transform: translateY(-2px);
+		}
+
+		.btn-modern-purple {
+			background-color: #7f56d9;
+		}
+
+		.btn-modern-purple:hover {
+			background-color: #6b47c4;
+			transform: translateY(-2px);
+		}
+
+		.btn-wrapper {
+			text-align: center;
+			margin-bottom: 1.3rem;
+		}
+
+		.btn-secondary-custom {
+			background-color: #6c757d;
+			color: white;
+			border: none;
+			border-radius: 50px;
+			padding: 0.6rem 1.8rem;
+			font-size: 0.95rem;
+			transition: background-color 0.2s, transform 0.2s;
+			text-decoration: none !important;
+		}
+
+		.btn-secondary-custom:hover {
+			background-color: #5a6268;
+			transform: translateY(-2px);
+		}
+
+		/* Disabled styling */
+		.btn-secondary-custom.disabled,
+		.btn-secondary-custom[aria-disabled="true"] {
+			background-color: #b6b6b6 !important;
+			cursor: not-allowed !important;
+			opacity: 0.65;
+			transform: none !important;
+			pointer-events: none !important;
+		}
+	</style>
+</head>
+
+<body>
+
+<div class="topbar">
+	Supervisor Assignment
+</div>
+
+<div class="page-container">
+
+	<h2>Allocate a Supervisor</h2>
+
+	<div th:if="${supervisorError}" class="alert alert-danger" role="alert">
+		<span th:text="${supervisorError}"></span>
+	</div>
+
+	<div th:if="${supervisorAssigned}" class="alert alert-success" role="alert">
+		Supervisor assigned successfully.
+	</div>
+
+	<div class="btn-wrapper">
+		<a th:href="@{/committee/assign_supervisor(selected_position_id=${position_id}, strategy='interests')}"
+		   class="btn-modern-blue">
+			Assign Based on Interests
+		</a>
+	</div>
+
+	<div class="btn-wrapper">
+		<a th:href="@{/committee/assign_supervisor(selected_position_id=${position_id}, strategy='load')}"
+		   class="btn-modern-purple">
+			Assign Based on Load
+		</a>
+	</div>
+
+	<div class="text-center mt-4">
+		<a th:href="@{/committee/dashboard}"
+		   class="btn-secondary-custom"
+		   th:classappend="${supervisorAssigned != null and supervisorAssigned} ? '' : ' disabled'"
+		   th:attr="aria-disabled=${supervisorAssigned != null and supervisorAssigned ? false : true}">
+			Back to Dashboard
+		</a>
+	</div>
+
+</div>
+
+</body>
+</html>

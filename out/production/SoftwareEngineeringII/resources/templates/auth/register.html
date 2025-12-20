@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traineeship App Registration</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+        background: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .register-card {
+        background: #ffffff;
+        padding: 2.5rem 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 450px;
+    }
+    .register-card h3 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+    }
+    .form-control:focus, .form-select:focus {
+        box-shadow: none;
+        border-color: #4a90e2;
+    }
+    .btn-primary, .btn-register {
+        background-color: #4a90e2;
+        border: none;
+    }
+    .btn-primary:hover, .btn-register:hover {
+        background-color: #357ABD;
+    }
+    .login-link {
+        display: block;
+        text-align: center;
+        margin-top: 1rem;
+        color: #4a90e2;
+        text-decoration: none;
+    }
+    .login-link:hover {
+        text-decoration: underline;
+    }
+    .error-message {
+        color: #e74c3c;
+        text-align: center;
+        margin-top: 1rem;
+    }
+    .success-message {
+        color: #27ae60;
+        text-align: center;
+        margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="register-card">
+  <h3>Register</h3>
+
+  <form th:action="@{/save}" th:object="${user}" method="post">
+    <div class="mb-3">
+      <input type="text" class="form-control" th:field="*{username}" placeholder="Username" required>
+      <div th:if="${#fields.hasErrors('username')}" class="error-message" th:errors="*{username}"></div>
+    </div>
+
+    <div class="mb-3">
+      <input type="password" class="form-control" th:field="*{password}" placeholder="Password" required>
+      <div th:if="${#fields.hasErrors('password')}" class="error-message" th:errors="*{password}"></div>
+    </div>
+
+    <div class="mb-3">
+      <select class="form-select" th:field="*{role}" required>
+        <option value="">Select Role</option>
+        <option value="STUDENT">Student</option>
+        <option value="PROFESSOR">Professor</option>
+        <option value="COMPANY">Company</option>
+      </select>
+    </div>
+
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-register">Register</button>
+    </div>
+
+    <a th:href="@{/login}" class="login-link">Already have an account? Login</a>
+
+    <div th:if="${param.error}" class="error-message">
+      Registration error. Please check your input.
+    </div>
+    <div th:if="${successMessage}" class="success-message" th:text="${successMessage}"></div>
+  </form>
+</div>
+
+</body>
+</html>

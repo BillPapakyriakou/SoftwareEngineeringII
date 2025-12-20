@@ -4,8 +4,13 @@
     <output url="file://$MODULE_DIR$/out/production/SoftwareEngineeringII" />
     <output-test url="file://$MODULE_DIR$/out/test/SoftwareEngineeringII" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/traineeship_app/src/main" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/traineeship_app/src/test" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/traineeship_app/src/test/java" isTestSource="true" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-beans:6.2.1" level="project" />
   </component>
 </module>
